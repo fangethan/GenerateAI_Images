@@ -13,11 +13,11 @@ Generate AI Images is a python algorithm implementing a recursive algorithm that
 To start the program, run the `generative.py` file:
 
 ```shell
-python onboard_navigation.py
+python generative.py
 ```
 
 To test the program, run the `test_generative.py` file:
 
 ```shell
-python onboard_navigation.py
+python test_generative.py
 
