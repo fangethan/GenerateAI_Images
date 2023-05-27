@@ -213,7 +213,6 @@ class TestGenerative(unittest.TestCase):
         Verify generate_new_images with image.txt and for each image of the generated images verify that image is of size 28x28,
         """
         image = read_image("image.txt")
-        original_flat = flatten_image(image)
         new_images = generate_new_images(image, 2)
 
         # check all images have 28 rows 
@@ -230,7 +229,6 @@ class TestGenerative(unittest.TestCase):
         Verify generate_new_images with image.txt and for each image of the generated images verify that all values in the generated image are either 1s or 0s,
         """
         image = read_image("image.txt")
-        original_flat = flatten_image(image)
         new_images = generate_new_images(image, 2)
 
         # test all values in the generated image are either 1s or 0s
