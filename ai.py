@@ -1,11 +1,11 @@
 def read_image(image_filename):
     """
     Reads an image from a file.
-    
+
     :param image_filename: String representing the name of the file.
     :return: 2D list of integers representing an image.
     """
-    with open(image_filename,"r") as image_file:
+    with open(image_filename, "r") as image_file:
         image = []
         for line in image_file:
             y = []
@@ -27,7 +27,7 @@ def linear(x, w, b):
     7.35
     """
 
-    return sum(w[j]*x[j] for j in range(len(w))) + b
+    return sum(w[j] * x[j] for j in range(len(w))) + b
 
 
 def linear_layer(x, w, b):
@@ -36,7 +36,7 @@ def linear_layer(x, w, b):
            biases (b).
     Output: A list of numbers corresponding to the values of f(x) in
             Equation 2.
-    
+
     >>> x = [1.0, 3.5]
     >>> w = [[3.8, 1.5], [-1.2, 1.1]]
     >>> b = [-1.7, 2.5]
@@ -75,7 +75,7 @@ def inference(x, w, b):
     Input: A list of inputs (x), a list of tables of weights (w) and a table
            of biases (b).
     Output: A list of numbers corresponding to output of the ANN.
-    
+
     >>> x = [1, 0]
     >>> w = [[[2.1, -3.1], [-0.7, 4.1]], [[3.8, 1.5], [-1.2, 1.1]]]
     >>> b = [[-1.1, 4.2], [-1.7, 2.5]]
@@ -85,11 +85,11 @@ def inference(x, w, b):
     """
 
     num_layers = len(w)
-    
-    for l in range(num_layers-1):
+
+    for l in range(num_layers - 1):
         x = relu_layer(x, w[l], b[l])
-        
-    return linear_layer(x, w[num_layers-1], b[num_layers-1])
+
+    return linear_layer(x, w[num_layers - 1], b[num_layers - 1])
 
 
 def read_weights(file_name):
@@ -98,7 +98,7 @@ def read_weights(file_name):
            that contains the weights of the ANN.
     Output: A list of tables of numbers corresponding to the weights of
             the ANN.
-    
+
     >>> w_example = read_weights('example_weights.txt')
     >>> w_example
     [[[2.1, -3.1], [-0.7, 4.1]], [[3.8, 1.5], [-1.2, 1.1]]]
@@ -118,10 +118,10 @@ def read_weights(file_name):
     #         w.append([])
     #     else:
     #         w[-1].append([float(w_ij) for w_ij in line.strip().split(",")])
-    
+
     # return w
 
-    with open(file_name,"r") as weights_file:
+    with open(file_name, "r") as weights_file:
         w = []
         for line in weights_file:
             if "#" == line[0]:
@@ -136,7 +136,7 @@ def read_biases(file_name):
     Input: A string (file_name), that corresponds to the name of the file
            that contains the biases of the ANN.
     Output: A table of numbers corresponding to the biases of the ANN.
-    
+
     >>> b_example = read_biases('example_biases.txt')
     >>> b_example
     [[-1.1, 4.2], [-1.7, 2.5]]
@@ -152,15 +152,15 @@ def read_biases(file_name):
     # for line in biases_file:
     #     if not "#" == line[0]:
     #         b.append([float(b_j) for b_j in line.strip().split(",")])
-    
+
     # return b
 
-    with open(file_name,"r") as biases_file:
+    with open(file_name, "r") as biases_file:
         b = []
         for line in biases_file:
             if not "#" == line[0]:
                 b.append([float(b_j) for b_j in line.strip().split(",")])
-    
+
     return b
 
 
@@ -170,7 +170,7 @@ def argmax(x):
            computed by the ANN.
     Output: A number representing the index of an element with the maximum
             value, the function should return the minimum index.
-    
+
     >>> x = [1.3, -1.52, 3.9, 0.1, 3.9]
     >>> argmax(x)
     2
@@ -178,12 +178,12 @@ def argmax(x):
 
     num_inputs = len(x)
     max_index = 0
-    
-    for i in range(1,num_inputs):
+
+    for i in range(1, num_inputs):
         if x[max_index] < x[i]:
             max_index = i
-            
-    return  max_index
+
+    return max_index
 
 
 def predict_number(image):
@@ -200,8 +200,8 @@ def predict_number(image):
         for element in row:
             x.append(element)
 
-    w = read_weights('./weights.txt')
-    b = read_biases('./biases.txt')
-    
+    w = read_weights("./weights.txt")
+    b = read_biases("./biases.txt")
+
     y = inference(x, w, b)
     return argmax(y)
